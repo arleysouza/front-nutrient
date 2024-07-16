@@ -13,6 +13,8 @@ import UserMenu from "./UserMenu";
 import PopupMessage from "./PopupMessage";
 import InputDatePicker from "./InputDatePicker";
 import Select from "./Select";
+import ScrollableProductList from "./ScrollableProductList";
+import ProductNutrients from "./ProductNutrients";
 
 export {
     Button,
@@ -28,6 +30,8 @@ export {
     NavigateButton,
     NutrientPane,
     PopupMessage,
+    ProductNutrients,
+    ScrollableProductList,
     Select,
     UserMenu
 }

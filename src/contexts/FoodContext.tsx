@@ -1,5 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { FoodContextProps, ProviderProps, PageProps, FoodNutrientsProps, ErrorProps } from "../types";
+import {
+  FoodContextProps,
+  ProviderProps,
+  PageProps,
+  FoodNutrientsProps,
+  ErrorProps,
+} from "../types";
 import { Food } from "../services";
 import { isErrorProps } from "../utils";
 
@@ -43,13 +49,13 @@ export function FoodProvider({ children }: ProviderProps) {
     }
   }
 
-  async function getById(id: string): Promise<void>{
+  async function getById(id: string): Promise<void> {
     try {
       const response = await Food.getById(id);
- 
+
       if (isErrorProps(response)) {
         setError(response);
-      }      else{
+      } else {
         setFood(response);
         setError(null);
       }
@@ -60,7 +66,15 @@ export function FoodProvider({ children }: ProviderProps) {
 
   return (
     <FoodContext.Provider
-      value={{ pageFoods, food, error, getFoodsByPage, search, getById, setError }}
+      value={{
+        pageFoods,
+        food,
+        error,
+        getFoodsByPage,
+        search,
+        getById,
+        setError,
+      }}
     >
       {children}
     </FoodContext.Provider>

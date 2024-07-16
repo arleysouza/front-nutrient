@@ -8,15 +8,19 @@ export interface UserContextProps {
   setToken: (value: TokenProps | null) => void;
   login: (mail: string, password: string) => void;
   logout: () => void;
-  create: (alias:string, mail: string, password: string) => void;
+  create: (alias: string, mail: string, password: string) => void;
   getUsers: () => void;
   updateRole: (id: string, profile: string) => void;
   error: ErrorProps | null;
   setError: (error: ErrorProps | null) => void;
-  updateAlias: (alias:string) => Promise<boolean>;
-  updateMail: (mail:string) => Promise<boolean>;
-  updatePassword: (password:string) => Promise<boolean>;
-  saveProfile: (birth_date:string, weight:string, sex:string) => Promise<boolean>;
+  updateAlias: (alias: string) => Promise<boolean>;
+  updateMail: (mail: string) => Promise<boolean>;
+  updatePassword: (password: string) => Promise<boolean>;
+  saveProfile: (
+    birth_date: string,
+    weight: string,
+    sex: string
+  ) => Promise<boolean>;
   deleteProfile: () => Promise<boolean>;
 }
 
@@ -70,11 +74,46 @@ export interface ProductContextProps {
   products: ProductNutrientsProps[];
   error: ErrorProps | null;
   setError: (value: ErrorProps | null) => void;
+  create: (
+    description: string,
+    serving_size: number | null,
+    serving_size_unit: string | null,
+    quantity_per_serving: number | null,
+    quantity_per_serving_unit: string | null,
+    energy: number | null,
+    protein: number | null,
+    carbohydrate: number | null,
+    sugar: number | null,
+    dietary_fiber: number | null,
+    total_fat: number | null,
+    saturated_fat: number | null,
+    trans_fat: number | null,
+    calcium: number | null,
+    sodium: number | null
+  ) => Promise<boolean>;
+  update: (
+    id: string,
+    description: string,
+    serving_size: number | null,
+    serving_size_unit: string | null,
+    quantity_per_serving: number | null,
+    quantity_per_serving_unit: string | null,
+    energy: number | null,
+    protein: number | null,
+    carbohydrate: number | null,
+    sugar: number | null,
+    dietary_fiber: number | null,
+    total_fat: number | null,
+    saturated_fat: number | null,
+    trans_fat: number | null,
+    calcium: number | null,
+    sodium: number | null
+  ) => Promise<boolean>;
 }
 
-export interface ProductNutrientsProps{
+export interface ProductNutrientsProps {
   id: string;
-  description: string | null;
+  description: string;
   serving_size: number | null;
   serving_size_unit: string | null;
   quantity_per_serving: number | null;
@@ -129,7 +168,7 @@ export interface TokenProps extends UserProps {
 }
 
 export interface ProfileProps {
-  birth_date:string;
-  weight:string;
-  sex:string;
+  birth_date: string;
+  weight: string;
+  sex: string;
 }
