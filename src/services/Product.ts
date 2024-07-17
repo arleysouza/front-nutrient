@@ -2,6 +2,16 @@ import { ErrorProps, ProductNutrientsProps } from "../types";
 import { api } from "./api";
 
 class Product {
+  async search(term:string): Promise<ProductNutrientsProps[] | ErrorProps> {
+    try {
+      const params = {term};
+      const { data } = await api.get("/product/search", { params });
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  }
+
   async listUserProducts(): Promise<ProductNutrientsProps[] | ErrorProps> {
     try {
       const { data } = await api.get("/product/byuser");
@@ -89,6 +99,15 @@ class Product {
         calcium,
         sodium,
       });
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  }
+
+  async delete(id:string): Promise<ProductNutrientsProps | ErrorProps> {
+    try {
+      const { data } = await api.delete(`/product/${id}`);
       return data;
     } catch (error: any) {
       return error;

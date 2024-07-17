@@ -15,11 +15,11 @@ export function ProductProvider({ children }: ProviderProps) {
   const [products, setProducts] = useState<ProductNutrientsProps[]>([]);
 
   useEffect(() => {
-    getProducts();
+    getUserProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function getProducts(): Promise<void> {
+  async function getUserProducts(): Promise<void> {
     try {
       const response = await Product.listUserProducts();
       if (isErrorProps(response)) {
@@ -31,6 +31,21 @@ export function ProductProvider({ children }: ProviderProps) {
     } catch (e: any) {
       setError(e.message);
     }
+  }
+
+  async function search(term:string): Promise<ProductNutrientsProps[]> {
+    try {
+      const response = await Product.search(term);
+      if (isErrorProps(response)) {
+        setError(response);
+      } else {
+        setError(null);
+        return response;
+      }
+    } catch (e: any) {
+      setError(e.message);
+    }
+    return [];
   }
 
   async function create(
@@ -72,7 +87,7 @@ export function ProductProvider({ children }: ProviderProps) {
         setError(response);
         return false;
       } else {
-        getProducts();
+        getUserProducts();
         setError(null);
         return true;
       }
@@ -123,7 +138,24 @@ export function ProductProvider({ children }: ProviderProps) {
         setError(response);
         return false;
       } else {
-        getProducts();
+        getUserProducts();
+        setError(null);
+        return true;
+      }
+    } catch (e: any) {
+      setError(e.message);
+      return false;
+    }
+  }
+
+  async function remove(id:string): Promise<boolean> {
+    try{
+      const response = await Product.delete(id);
+      if (isErrorProps(response)) {
+        setError(response);
+        return false;
+      } else {
+        getUserProducts();
         setError(null);
         return true;
       }
@@ -134,7 +166,7 @@ export function ProductProvider({ children }: ProviderProps) {
   }
 
   return (
-    <ProductContext.Provider value={{ products, error, setError, create, update }}>
+    <ProductContext.Provider value={{ products, search, error, setError, create, update, remove }}>
       {children}
     </ProductContext.Provider>
   );

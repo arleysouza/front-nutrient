@@ -15,6 +15,7 @@ import InputDatePicker from "./InputDatePicker";
 import Select from "./Select";
 import ScrollableProductList from "./ScrollableProductList";
 import ProductNutrients from "./ProductNutrients";
+import ProductSearch from "./ProductSearch";
 
 export {
     Button,
@@ -31,6 +32,7 @@ export {
     NutrientPane,
     PopupMessage,
     ProductNutrients,
+    ProductSearch,
     ScrollableProductList,
     Select,
     UserMenu

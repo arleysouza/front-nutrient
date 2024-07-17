@@ -76,8 +76,8 @@ export interface ProductContextProps {
   setError: (value: ErrorProps | null) => void;
   create: (
     description: string,
-    serving_size: number | null,
-    serving_size_unit: string | null,
+    serving_size: number,
+    serving_size_unit: string,
     quantity_per_serving: number | null,
     quantity_per_serving_unit: string | null,
     energy: number | null,
@@ -94,8 +94,8 @@ export interface ProductContextProps {
   update: (
     id: string,
     description: string,
-    serving_size: number | null,
-    serving_size_unit: string | null,
+    serving_size: number,
+    serving_size_unit: string,
     quantity_per_serving: number | null,
     quantity_per_serving_unit: string | null,
     energy: number | null,
@@ -109,13 +109,15 @@ export interface ProductContextProps {
     calcium: number | null,
     sodium: number | null
   ) => Promise<boolean>;
+  remove: (id:string) => Promise<boolean>;
+  search: (term:string) => Promise<ProductNutrientsProps[]>;
 }
 
 export interface ProductNutrientsProps {
   id: string;
   description: string;
-  serving_size: number | null;
-  serving_size_unit: string | null;
+  serving_size: number;
+  serving_size_unit: string;
   quantity_per_serving: number | null;
   quantity_per_serving_unit: string | null;
   energy: number | null;

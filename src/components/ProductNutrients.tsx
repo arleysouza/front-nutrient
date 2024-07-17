@@ -2,22 +2,22 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ProductNutrientsProps } from "../types";
 import Button from "./Button";
-import { useProduct } from "../hooks";
 
 interface Props {
   product: ProductNutrientsProps;
   setMessagePopup: (value: string) => void;
   setShowPopup: (value: boolean) => void;
+  handleSave: (value: ProductNutrientsProps) => Promise<void>;
+  handleDelete: (id: string) => Promise<void>;
 }
 
 export default function ProductNutrients({
   product,
-  setMessagePopup,
-  setShowPopup,
+  handleSave,
+  handleDelete,
 }: Props) {
   const [productDetails, setProductDetails] =
     useState<ProductNutrientsProps>(product);
-  const { create, update } = useProduct();
 
   useEffect(() => {
     setProductDetails(product);
@@ -30,37 +30,6 @@ export default function ProductNutrients({
       [name]: value,
     }));
   };
-
-  const handleSave = async () => {
-    if (product !== productDetails) {
-      const response = await update(
-        productDetails.id,
-        productDetails.description,
-        productDetails.serving_size,
-        productDetails.serving_size_unit,
-        productDetails.quantity_per_serving,
-        productDetails.quantity_per_serving_unit,
-        productDetails.energy,
-        productDetails.protein,
-        productDetails.carbohydrate,
-        productDetails.sugar,
-        productDetails.dietary_fiber,
-        productDetails.total_fat,
-        productDetails.saturated_fat,
-        productDetails.trans_fat,
-        productDetails.calcium,
-        productDetails.sodium
-      );
-      if( response ){
-        setMessagePopup("Produto atualizado com sucesso");
-        setShowPopup(true);
-      }
-    } else {
-      setMessagePopup("Não existem alterações");
-      setShowPopup(true);
-    }
-  };
-  const handleDelete = () => {};
 
   return (
     <Wrapper>
@@ -224,8 +193,13 @@ export default function ProductNutrients({
         />
       </InputWrapper>
       <LineSld>
-        <Button label="Salvar" click={handleSave} />
-        <Button label="Excluir" click={handleDelete} />
+        <Button label="Salvar" click={() => handleSave(productDetails)} />
+        {productDetails.id && (
+          <Button
+            label="Excluir"
+            click={() => handleDelete(productDetails.id)}
+          />
+        )}
       </LineSld>
     </Wrapper>
   );
