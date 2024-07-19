@@ -1,3 +1,4 @@
+import EatPage from "./EatPage";
 import FoodPage from "./FoodPage";
 import LoadingPage from "./LoadingPage";
 import NotFoundPage from "./NotFoundPage";
@@ -8,6 +9,7 @@ import SignInPage from "./SignInPage";
 import SignUpPage from "./SignUpPage";
 
 export {
+    EatPage,
     FoodPage,
     LoadingPage,
     NotFoundPage,

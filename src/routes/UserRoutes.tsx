@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import { FoodPage, NotFoundPage, ProductPage, ProfilePage, SettingsPage } from "../pages";
-import { FoodProvider, ProductProvider } from "../contexts";
+import { EatPage, FoodPage, NotFoundPage, ProductPage, ProfilePage, SettingsPage } from "../pages";
+import { EatProvider, FoodProvider, ProductProvider } from "../contexts";
 
 export default function UserRoutes() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<FoodProvider><FoodPage /></FoodProvider>} />
+        <Route path="/" element={<EatProvider><EatPage /></EatProvider>} />
+        <Route path="/eat" element={<EatProvider><EatPage /></EatProvider>} />
         <Route path="/foods" element={<FoodProvider><FoodPage /></FoodProvider>} />
         <Route path="/products" element={<ProductProvider><ProductPage /></ProductProvider>} />
         <Route path="/settings" element={<SettingsPage />} />

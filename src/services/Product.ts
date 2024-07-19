@@ -5,7 +5,7 @@ class Product {
   async search(term:string): Promise<ProductNutrientsProps[] | ErrorProps> {
     try {
       const params = {term};
-      const { data } = await api.get("/product/search", { params });
+      const { data } = await api.get("/product/searchbyuser", { params });
       return data;
     } catch (error: any) {
       return error;

@@ -1,4 +1,5 @@
 import Category from "./Category";
+import Eat from "./Eat";
 import Field from "./Field";
 import Food from "./Food";
 import Product from "./Product";
@@ -7,6 +8,7 @@ import User from "./User";
 
 export {
     Category,
+    Eat,
     Field,
     Food,
     Product,

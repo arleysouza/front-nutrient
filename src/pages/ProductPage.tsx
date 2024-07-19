@@ -9,7 +9,7 @@ import {
 import { useProduct } from "../hooks";
 
 export default function ProductPage() {
-  const { products, error, setError } = useProduct();
+  const { products, error } = useProduct();
   const [showPopup, setShowPopup] = useState(false);
   const [messagePopup, setMessagePopup] = useState("");
  

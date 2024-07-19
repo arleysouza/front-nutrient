@@ -36,9 +36,12 @@ export default function UserMenu() {
       <UserIcon onClick={toggleMenu}>{token?.alias.charAt(0).toUpperCase()}</UserIcon>
       {isOpen && (
         <DropdownMenu>
-          <StyledLink to="/foods" onClick={() => setIsOpen(false)}>
-            Alimentos
+          <StyledLink to="/eat" onClick={() => setIsOpen(false)}>
+            Consumos diários
           </StyledLink>
+          <StyledLinkBorderTop to="/foods" onClick={() => setIsOpen(false)}>
+            Alimentos
+          </StyledLinkBorderTop>
           <StyledLink to="/products" onClick={() => setIsOpen(false)}>
             Produtos
           </StyledLink>
