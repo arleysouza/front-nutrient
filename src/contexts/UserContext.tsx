@@ -142,7 +142,6 @@ export function UserProvider({ children }: ProviderProps) {
 
   const deleteProfile = async (): Promise<boolean> => {
     const response = await Profile.delete();
-    console.log("deleteProfile", response)
     if (isErrorProps(response)) {
       setError(response);
       return false;
@@ -154,22 +153,15 @@ export function UserProvider({ children }: ProviderProps) {
   };
 
   const getUsers = async () => {
-    /*const response = await User.list();
-    if (!isErrorProps(response)) {
-      setUsers(response);
-    }
-    else{
-      setError(response);
-    }*/
+    /*
+    perfil de administardor, para listar os usuários e trocar o perfil para adm/user
+    */
   };
 
   const updateRole = async (id: string, profile: string) => {
-    /*const response = await User.updateRole(id, profile);
-    if (!isErrorProps(response)) {
-      getUsers();
-    } else {
-      setError(response);
-    }*/
+    /*
+    perfil de administardor, para alterar usuário para adm/user
+    */
   };
 
   return (

@@ -1,4 +1,4 @@
-import { EatProductProps, ErrorProps } from "../types";
+import { EatFoodProps, EatProductProps, ErrorProps } from "../types";
 import { api } from "./api";
 
 class Eat {
@@ -15,6 +15,24 @@ class Eat {
   async createProduct(product:string, date:string, quantity:number): Promise<EatProductProps[] | ErrorProps> {
     try {
       const { data } = await api.post("/eat/product", { product, date, quantity });
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  }
+
+  async deleteProduct(id:string): Promise<EatProductProps | ErrorProps> {
+    try {
+      const { data } = await api.delete(`/eat/product/${id}`);
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  }
+
+  async deleteFood(id:string): Promise<EatFoodProps | ErrorProps> {
+    try {
+      const { data } = await api.delete(`/eat/food/${id}`);
       return data;
     } catch (error: any) {
       return error;

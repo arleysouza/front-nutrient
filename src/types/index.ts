@@ -78,8 +78,8 @@ export interface ProductContextProps {
     description: string,
     serving_size: number,
     serving_size_unit: string,
-    quantity_per_serving: number | null,
-    quantity_per_serving_unit: string | null,
+    quantity_per_serving: number,
+    quantity_per_serving_unit: string,
     energy: number | null,
     protein: number | null,
     carbohydrate: number | null,
@@ -96,8 +96,8 @@ export interface ProductContextProps {
     description: string,
     serving_size: number,
     serving_size_unit: string,
-    quantity_per_serving: number | null,
-    quantity_per_serving_unit: string | null,
+    quantity_per_serving: number,
+    quantity_per_serving_unit: string,
     energy: number | null,
     protein: number | null,
     carbohydrate: number | null,
@@ -120,6 +120,7 @@ export interface EatContextProps {
   error: ErrorProps | null;
   setError: (value: ErrorProps | null) => void;
   createProduct: (product:string, date:string, quantity:number) => Promise<boolean>;
+  removeProduct: (id:string) => Promise<boolean>;
   setDay: (value:Date) => void;
   searchFood: (term:string) => Promise<boolean>;
   searchProduct: (term:string) => Promise<boolean>;
@@ -130,8 +131,8 @@ export interface ProductNutrientsProps {
   description: string;
   serving_size: number;
   serving_size_unit: string;
-  quantity_per_serving: number | null;
-  quantity_per_serving_unit: string | null;
+  quantity_per_serving: number;
+  quantity_per_serving_unit: string;
   energy: number | null;
   protein: number | null;
   carbohydrate: number | null;
@@ -194,8 +195,8 @@ export interface EatProductProps {
   description: string;
   serving_size: number; 
   serving_size_unit: string; 
-  quantity_per_serving: number | null;
-  quantity_per_serving_unit: string | null;
+  quantity_per_serving: number;
+  quantity_per_serving_unit: string;
   energy: number | null;
   protein: number | null; 
   carbohydrate: number | null;
@@ -204,6 +205,19 @@ export interface EatProductProps {
   total_fat: number | null;
   saturated_fat: number | null;
   trans_fat: number | null;
+  calcium: number | null;
+  sodium: number | null;
+}
+
+export interface EatFoodProps {
+  id: string;
+  date: string;
+  quantity: string; 
+  description: string;
+  energy: number | null;
+  protein: number | null; 
+  carbohydrate: number | null;
+  dietary_fiber: number | null;
   calcium: number | null;
   sodium: number | null;
 }

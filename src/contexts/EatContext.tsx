@@ -84,8 +84,24 @@ export function EatProvider({ children }: ProviderProps) {
     return false;
   }
 
+  async function removeProduct(id:string): Promise<boolean> {
+    try{
+      const response = await Eat.deleteProduct(id);
+      if (isErrorProps(response)) {
+        setError(response);
+      } else {
+        getEatProduct(dateFormat(day));
+        setError(null);
+        return true;
+      }
+    } catch (e: any) {
+      setError(e.message);
+    }
+    return false;
+  }
+
   return (
-    <EatContext.Provider value={{ eatProducts, foods, products, searchFood, searchProduct, error, setError, createProduct, setDay }}>
+    <EatContext.Provider value={{ eatProducts, foods, products, searchFood, searchProduct, error, setError, createProduct, removeProduct, setDay }}>
       {children}
     </EatContext.Provider>
   );

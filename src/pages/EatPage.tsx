@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Error, Header, Button, PopupMessage, InputDatePickerConsumer, Input } from "../components";
+import { Error, Header, Button, PopupMessage, InputDatePickerConsumer, Input, TableEatProduct } from "../components";
 import { useEat } from "../hooks";
 import { useState } from "react";
 import { FoodProps, ProductNutrientsProps } from "../types";
 import { dateFormat } from "../utils";
 
 export default function EatPage() {
-  const { products, foods, searchFood, searchProduct, error, setError, createProduct } = useEat();
+  const { products, foods, eatProducts, searchFood, searchProduct, error, setError, createProduct } = useEat();
   const [showPopup, setShowPopup] = useState(false);
   const [messagePopup, setMessagePopup] = useState("");
   const [term, setTerm] = useState("");
@@ -15,7 +15,7 @@ export default function EatPage() {
     useState<ProductNutrientsProps | null>(null);
   const [searchType, setSearchType] = useState<string | null>(null);
   const [date, setDate] = useState<Date | null>(new Date());
-  const [quantity, setQuantity] = useState<number | null>(null);
+  const [quantity, setQuantity] = useState("");
 
   const handleFood = async () => {
     if (term.trim().length >= 3) {
@@ -45,10 +45,19 @@ export default function EatPage() {
   
   const handleSave = async () => {
     if( searchType === "product" && selectedProduct ){
-      if( quantity && date){
-        await createProduct(selectedProduct.id, dateFormat(date), quantity);
-      } else {
+
+      if( !date ){
+        setError({error:"Selecione a data"});
+      } else if( !quantity || isNaN(parseFloat(quantity)) ){
         setError({error:"Forneça a quantidade consumida"});
+      } else if( parseFloat(quantity) <= 0 ){
+        setError({error:"A quantidade consumida precisa ser um valor maior que zero"});
+      } else { 
+        const response = await createProduct(selectedProduct.id, dateFormat(date), parseFloat(quantity));
+        if (response) {
+          setMessagePopup("Consumo registrado com sucesso");
+          setShowPopup(true);
+        }
       }
     } else {
       setError({error:"Selecione um alimento ou produto"});
@@ -109,6 +118,7 @@ export default function EatPage() {
         <LineSld>
           <Button label="Salvar" click={handleSave} />
         </LineSld>
+        {eatProducts.length > 0 && <TableEatProduct items={eatProducts} />}
       </BodyWrapper>
     </WrapperSld>
   );

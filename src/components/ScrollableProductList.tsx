@@ -40,7 +40,17 @@ export default function ScrollableProductList({
           error:
             "Forneça a unidade de medida de cada porção, por exemplo, g (gramas)",
         });
-      } else {
+      } else if ( product.quantity_per_serving === null ) {
+        setError({ error:"Forneça a quantidade de unidades por porção, por exemplo, 3 biscoitos" });
+      } else if (
+        product.quantity_per_serving_unit === null ||
+        product.quantity_per_serving_unit.trim().length === 0
+      ) {
+        setError({
+          error:
+            "Forneça a unidade usada por porção, por exemplo, biscoitos e colheres",
+        });
+      }else {
         if (!product.id) {
           const response = await create(
             product.description,
@@ -109,8 +119,8 @@ export default function ScrollableProductList({
         description: "",
         serving_size: 0,
         serving_size_unit: "",
-        quantity_per_serving: null,
-        quantity_per_serving_unit: null,
+        quantity_per_serving: 0,
+        quantity_per_serving_unit: "",
         energy: null,
         protein: null,
         carbohydrate: null,
