@@ -18,6 +18,7 @@ import ProductNutrients from "./ProductNutrients";
 import ProductSearch from "./ProductSearch";
 import InputDatePickerConsumer from "./InputDatePickerConsumer";
 import TableEatProduct from "./TableEatProduct";
+import TableEatFood from "./TableEatFood";
 
 export {
     Button,
@@ -39,5 +40,6 @@ export {
     ScrollableProductList,
     Select,
     TableEatProduct,
+    TableEatFood,
     UserMenu
 }

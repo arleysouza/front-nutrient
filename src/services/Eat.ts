@@ -30,6 +30,25 @@ class Eat {
     }
   }
 
+  async listFoods(date:string): Promise<EatFoodProps[] | ErrorProps> {
+    try {
+      const params = {date};
+      const { data } = await api.get("/eat/food", { params });
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  }
+
+  async createFood(food:string, date:string, quantity:number): Promise<EatProductProps[] | ErrorProps> {
+    try {
+      const { data } = await api.post("/eat/food", { food, date, quantity });
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  }
+
   async deleteFood(id:string): Promise<EatFoodProps | ErrorProps> {
     try {
       const { data } = await api.delete(`/eat/food/${id}`);

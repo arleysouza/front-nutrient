@@ -1,20 +1,19 @@
 import styled from "styled-components";
-import { Error, Header, Button, PopupMessage, InputDatePickerConsumer, Input, TableEatProduct } from "../components";
+import { Error, Header, Button, PopupMessage, InputDatePickerConsumer, Input, TableEatProduct, TableEatFood } from "../components";
 import { useEat } from "../hooks";
 import { useState } from "react";
 import { FoodProps, ProductNutrientsProps } from "../types";
 import { dateFormat } from "../utils";
 
 export default function EatPage() {
-  const { products, foods, eatProducts, searchFood, searchProduct, error, setError, createProduct } = useEat();
+  const { products, foods, eatProducts, eatFoods, searchFood, searchProduct, error, setError, createProduct, createFood, date, setDate } = useEat();
   const [showPopup, setShowPopup] = useState(false);
   const [messagePopup, setMessagePopup] = useState("");
   const [term, setTerm] = useState("");
   const [selectedFood, setSelectedFood] = useState<FoodProps | null>(null);
-  const [selectedProduct, setSelectedProduct] =
-    useState<ProductNutrientsProps | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<ProductNutrientsProps | null>(null);
   const [searchType, setSearchType] = useState<string | null>(null);
-  const [date, setDate] = useState<Date | null>(new Date());
+  //const [date, setDate] = useState<Date | null>(new Date());
   const [quantity, setQuantity] = useState("");
 
   const handleFood = async () => {
@@ -45,7 +44,6 @@ export default function EatPage() {
   
   const handleSave = async () => {
     if( searchType === "product" && selectedProduct ){
-
       if( !date ){
         setError({error:"Selecione a data"});
       } else if( !quantity || isNaN(parseFloat(quantity)) ){
@@ -54,6 +52,20 @@ export default function EatPage() {
         setError({error:"A quantidade consumida precisa ser um valor maior que zero"});
       } else { 
         const response = await createProduct(selectedProduct.id, dateFormat(date), parseFloat(quantity));
+        if (response) {
+          setMessagePopup("Consumo registrado com sucesso");
+          setShowPopup(true);
+        }
+      }
+    } else if( searchType === "food" && selectedFood ){
+      if( !date ){
+        setError({error:"Selecione a data"});
+      } else if( !quantity || isNaN(parseFloat(quantity)) ){
+        setError({error:"Forneça a quantidade consumida"});
+      } else if( parseFloat(quantity) <= 0 ){
+        setError({error:"A quantidade consumida precisa ser um valor maior que zero"});
+      } else { 
+        const response = await createFood(selectedFood.id, dateFormat(date), parseFloat(quantity));
         if (response) {
           setMessagePopup("Consumo registrado com sucesso");
           setShowPopup(true);
@@ -68,7 +80,7 @@ export default function EatPage() {
   if (searchType === "product") {
     items = products.map((item) => (
       <ItemSld key={item.id} onClick={() => setSelectedProduct(item)} selected={selectedProduct?.id === item.id}>
-        {item.description}
+        {item.description} ({item.quantity_per_serving_unit})
       </ItemSld>
     ));
   } else if (searchType === "food") {
@@ -119,6 +131,7 @@ export default function EatPage() {
           <Button label="Salvar" click={handleSave} />
         </LineSld>
         {eatProducts.length > 0 && <TableEatProduct items={eatProducts} />}
+        {eatFoods.length > 0 && <TableEatFood items={eatFoods} />}
       </BodyWrapper>
     </WrapperSld>
   );

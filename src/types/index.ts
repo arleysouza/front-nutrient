@@ -115,13 +115,17 @@ export interface ProductContextProps {
 
 export interface EatContextProps {
   eatProducts: EatProductProps[];
+  eatFoods: EatFoodProps[];
   products: ProductNutrientsProps[];
   foods: FoodProps[];
   error: ErrorProps | null;
   setError: (value: ErrorProps | null) => void;
   createProduct: (product:string, date:string, quantity:number) => Promise<boolean>;
+  createFood: (food:string, date:string, quantity:number) => Promise<boolean>;
   removeProduct: (id:string) => Promise<boolean>;
-  setDay: (value:Date) => void;
+  removeFood: (id:string) => Promise<boolean>;
+  date: Date | null;
+  setDate: (value:Date | null) => void;
   searchFood: (term:string) => Promise<boolean>;
   searchProduct: (term:string) => Promise<boolean>;
 }
@@ -212,7 +216,7 @@ export interface EatProductProps {
 export interface EatFoodProps {
   id: string;
   date: string;
-  quantity: string; 
+  quantity: number; 
   description: string;
   energy: number | null;
   protein: number | null; 
