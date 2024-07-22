@@ -156,12 +156,27 @@ export function UserProvider({ children }: ProviderProps) {
     /*
     perfil de administardor, para listar os usuários e trocar o perfil para adm/user
     */
+    const response = await User.list();
+    if (isErrorProps(response)) {
+      setError(response);
+    } else {
+      setError(null);
+      setUsers(response);
+    }
   };
 
-  const updateRole = async (id: string, profile: string) => {
+  const updateRole = async (id: string, role: string): Promise<boolean> => {
     /*
     perfil de administardor, para alterar usuário para adm/user
     */
+    const response = await User.updateRole(id, role);
+    if (!isErrorProps(response)) {
+      getUsers();
+      return true;
+    } else {
+      setError(response);
+      return false;
+    }
   };
 
   return (
@@ -183,7 +198,7 @@ export function UserProvider({ children }: ProviderProps) {
         updateMail,
         updatePassword,
         saveProfile,
-        deleteProfile
+        deleteProfile,
       }}
     >
       {children}

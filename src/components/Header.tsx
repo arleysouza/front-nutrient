@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Logo from "./Logo";
 import UserMenu from "./UserMenu";
 import { useUser } from "../hooks";
+import AdmMenu from "./AdmMenu";
 
 export default function Header() {
   const {token} = useUser();
@@ -9,7 +10,8 @@ export default function Header() {
   return (
     <Wrapper>
         <Logo />
-        {token && <UserMenu />}
+        {token && token.role ==="user" && <UserMenu />}
+        {token && token.role ==="adm" && <AdmMenu />}
     </Wrapper>
   );
 }

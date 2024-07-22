@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { FoodPage, NotFoundPage, SignInPage, SignUpPage } from "../pages";
-import { FoodProvider } from "../contexts";
+import { NotFoundPage, SignInPage, SignUpPage } from "../pages";
+
 
 export default function UnsignedRoutes() {
   return (
@@ -9,7 +9,6 @@ export default function UnsignedRoutes() {
         <Route path="/" element={<SignInPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/foods" element={<FoodProvider><FoodPage /></FoodProvider>} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </>

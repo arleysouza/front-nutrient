@@ -47,6 +47,24 @@ class User {
     }
   }
 
+  async list(): Promise<UserProps[] | ErrorProps> {
+    try {
+      const { data } = await api.get("/user");
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  }
+
+  async updateRole(id: string,role: string): Promise<UserProps | ErrorProps> {
+    try {
+      const { data } = await api.put("/user/role", { id, role });
+      return data;
+    } catch (error: any) {
+      return error;
+    }
+  }
+
 }
 
 const user = new User();

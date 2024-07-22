@@ -10,7 +10,7 @@ export interface UserContextProps {
   logout: () => void;
   create: (alias: string, mail: string, password: string) => void;
   getUsers: () => void;
-  updateRole: (id: string, profile: string) => void;
+  updateRole: (id: string, role: string) => Promise<boolean>;
   error: ErrorProps | null;
   setError: (error: ErrorProps | null) => void;
   updateAlias: (alias: string) => Promise<boolean>;

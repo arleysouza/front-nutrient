@@ -7,6 +7,7 @@ import ProfilePage from "./ProfilePage";
 import SettingsPage from "./SettingsPage";
 import SignInPage from "./SignInPage";
 import SignUpPage from "./SignUpPage";
+import UserRolePage from "./UserRolePage";
 
 export {
     EatPage,
@@ -17,5 +18,6 @@ export {
     ProfilePage,
     SettingsPage,
     SignInPage,
-    SignUpPage
+    SignUpPage,
+    UserRolePage
 }

@@ -19,8 +19,11 @@ import ProductSearch from "./ProductSearch";
 import InputDatePickerConsumer from "./InputDatePickerConsumer";
 import TableEatProduct from "./TableEatProduct";
 import TableEatFood from "./TableEatFood";
+import AdmMenu from "./AdmMenu";
+import TableUser from "./TableUser";
 
 export {
+    AdmMenu,
     Button,
     Error,
     Header,
@@ -41,5 +44,6 @@ export {
     Select,
     TableEatProduct,
     TableEatFood,
+    TableUser,
     UserMenu
 }
